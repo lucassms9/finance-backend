@@ -1,0 +1,30 @@
+scalar Date
+
+type Transaction {
+  id: ID!
+  accountId: String!
+  categoryId: String
+  category: Category
+  account: Account
+  reference: String
+  amount: Float!
+  currency: String!
+  date: Date!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  color: String
+}
+
+type Account {
+  id: ID!
+  name: String!
+  bank: String!
+}
+
+type Query {
+  transactions(skip: Int!, amountToFetch: Int!): [Transaction!]!
+  transaction(id: ID!): Transaction
+}
