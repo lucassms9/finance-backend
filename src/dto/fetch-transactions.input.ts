@@ -10,5 +10,20 @@ export class FetchTransactionsArgs {
   @Field(() => Int)
   @Min(1)
   @Max(50)
-  amountToFetch = 15;
+  take = 15;
+
+  @Field(() => String)
+  search = '';
+
+  @Field(() => String)
+  account = '';
+
+  @Field(() => String)
+  bank = '';
+
+  @Field(() => Date)
+  initDate = '';
+
+  @Field(() => Date)
+  endDate = '';
 }

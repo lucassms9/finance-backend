@@ -33,7 +33,7 @@ export class Account {
 }
 
 export abstract class IQuery {
-    abstract transactions(skip: number, amountToFetch: number): Transaction[] | Promise<Transaction[]>;
+    abstract transactions(skip: number, take: number, search?: Nullable<string>, account?: Nullable<string>, bank?: Nullable<string>, initDate?: Nullable<Date>, endDate?: Nullable<Date>): Transaction[] | Promise<Transaction[]>;
 
     abstract transaction(id: string): Nullable<Transaction> | Promise<Nullable<Transaction>>;
 }

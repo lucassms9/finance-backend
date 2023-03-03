@@ -25,6 +25,14 @@ type Account {
 }
 
 type Query {
-  transactions(skip: Int!, amountToFetch: Int!): [Transaction!]!
+  transactions(
+    skip: Int!
+    take: Int!
+    search: String
+    account: String
+    bank: String
+    initDate: Date
+    endDate: Date
+  ): [Transaction!]!
   transaction(id: ID!): Transaction
 }

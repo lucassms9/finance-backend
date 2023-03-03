@@ -22,16 +22,17 @@ export class TransactionService {
   }
 
   // Get multiple posts
-  async trasanctions(
-    args: FetchTransactionsArgs = { skip: 0, amountToFetch: 5 },
-  ): Promise<Transaction[]> {
+  async trasanctions(args: FetchTransactionsArgs): Promise<Transaction[]> {
     return this.prisma.transaction.findMany({
+      where: {
+        ...(args.account && { accountId: args.account }),
+      },
       include: {
         account: true,
         category: true,
       },
-      skip: args.skip,
-      take: args.amountToFetch,
+      skip: args.skip || 0,
+      take: args.take || 10,
     });
   }
 }
