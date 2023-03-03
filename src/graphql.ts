@@ -12,14 +12,28 @@ export class Transaction {
     id: string;
     accountId: string;
     categoryId?: Nullable<string>;
+    category?: Nullable<Category>;
+    account?: Nullable<Account>;
     reference?: Nullable<string>;
     amount: number;
     currency: string;
-    date: string;
+    date: Date;
+}
+
+export class Category {
+    id: string;
+    name: string;
+    color?: Nullable<string>;
+}
+
+export class Account {
+    id: string;
+    name: string;
+    bank: string;
 }
 
 export abstract class IQuery {
-    abstract transactions(): Transaction[] | Promise<Transaction[]>;
+    abstract transactions(skip: number, amountToFetch: number): Transaction[] | Promise<Transaction[]>;
 
     abstract transaction(id: string): Nullable<Transaction> | Promise<Nullable<Transaction>>;
 }
