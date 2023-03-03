@@ -1,4 +1,5 @@
 # compiled output
+.docker
 /dist
 /node_modules
 # Logs

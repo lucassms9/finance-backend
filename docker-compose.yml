@@ -1,12 +1,16 @@
 version: '3'
 services:
-  backend-challenge:
+  postgres:
     image: postgres
     environment:
       POSTGRES_PASSWORD: 'postgres'
-    container_name: backend-challenge
-
+    container_name: finance-challenge
+    restart: always
     ports:
       - '5432:5432'
     volumes:
       - .docker/dbdata:/var/lib/postgresql/data
+      - ./prisma/data/categories.csv:/docker-entrypoint-initdb.d/categories.csv
+      - ./prisma/data/accounts.csv:/docker-entrypoint-initdb.d/accounts.csv
+      - ./prisma/data/transactions.csv:/docker-entrypoint-initdb.d/transactions.csv
+    

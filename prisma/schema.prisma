@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Transaction {
+  id         String   @id @default(cuid())
+  accountId  String?
+  categoryId String?
+  reference  String?
+  amount     Decimal  @db.Decimal(9, 2)
+  currency   String
+  date       DateTime
+  account    Account?  @relation(fields: [accountId], references: [id])
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  @@map("transactions")
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  name         String
+  color        String?
+  transactions Transaction[]
+
+  @@map("categories")
+}
+
+model Account {
+  id           String        @id @default(cuid())
+  name         String
+  bank         String
+  transactions Transaction[]
+
+  @@map("accounts")
+}
